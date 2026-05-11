@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "mirror": "node scripts/mirror-site.mjs",
+    "mirror:github": "PUBLIC_BASE_PATH=/frenchelles-ibiza node scripts/mirror-site.mjs",
     "serve": "python3 -m http.server 4173"
   }
 }

@@ -4,6 +4,7 @@ import path from "node:path";
 import process from "node:process";
 
 const sourceUrl = "https://frenchelles.com/ibiza";
+const publicBasePath = (process.env.PUBLIC_BASE_PATH || "").replace(/\/$/, "");
 const rootDir = process.cwd();
 const assetsDir = path.join(rootDir, "assets");
 const indexPath = path.join(rootDir, "index.html");
@@ -88,7 +89,7 @@ function localTarget(remoteUrl) {
   const fileName = `${sanitize(rawBase)}.${hash(remoteUrl)}${ext}`;
   const rawDir = path.dirname(url.pathname).split("/").filter(Boolean).map(sanitize);
   const filePath = path.join(assetsDir, sanitize(url.hostname), ...rawDir, fileName);
-  const publicPath = `/assets/${[sanitize(url.hostname), ...rawDir, fileName].join("/")}`;
+  const publicPath = `${publicBasePath}/assets/${[sanitize(url.hostname), ...rawDir, fileName].join("/")}`;
 
   const target = { filePath, publicPath };
   localByUrl.set(remoteUrl, target);
